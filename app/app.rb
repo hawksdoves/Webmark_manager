@@ -28,6 +28,13 @@ class BookmarkManager < Sinatra::Base
     redirect '/links'
   end
 
+  get '/tags/bubbles' do
+    @bubble_tags = Tag.all.select { |tag| tag.tag == 'bubbles' }
+    
+    erb :bubbles
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
+
 end
