@@ -8,10 +8,6 @@ require_relative 'data_mapper_setup'
 
 class BookmarkManager < Sinatra::Base
 
-  get '/' do
-    redirect '/links'
-  end
-
   get '/links' do
     @links = Link.all
     erb :links
@@ -28,10 +24,10 @@ class BookmarkManager < Sinatra::Base
     redirect '/links'
   end
 
-  get '/tags/bubbles' do
-    @bubble_tags = Tag.all.select { |tag| tag.tag == 'bubbles' }
-    
-    erb :bubbles
+  get '/tags/:tag' do
+    tag = Tag.first(tag: params[:tag])
+    @links = tag ? tag.links : []
+    erb :links
   end
 
   # start the server if ruby file executed directly

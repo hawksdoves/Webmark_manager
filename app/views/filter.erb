@@ -1,12 +1,12 @@
 
   <h1>Bubble Links</h1>
 
-  <ul id='bubble_links'>
-    <% @bubble_tags[0].links.each do |link| %>
+  <ul id='links'>
+    <% @links.each do |link| %>
       <li>
         Title: <%= link.title %>
         URL: <%= link.url %>
-        Tag: <%= @bubble_tags[0].tag %>
+
       </li>
     <% end %>
   </ul>
