@@ -1,0 +1,29 @@
+<head>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+<h1> Welcome <%= @name %>!</h1>
+  <h1>- Bookmarks -</h1>
+  <h2></h2>
+  <div class="link-box">
+    <ul id="links">
+      <% @links.each do |link| %>
+        <div>
+          <li>
+            <a href="<%=link.href %>"><%=link.title %></a>
+            <div><% link.tags.each do |tag| %>
+              <a href="/tags/<%=tag.name%>" class="tag"><%= tag.name %></a>
+            <% end %>
+              <a class="add" href="/tag/add/<%= link.id %>">+</a>
+            </div>
+          </li>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+
+  <form class="" action='/link/add' method="get">
+    <input type="submit" value="Add Link">
+  </form>
+</body>

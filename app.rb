@@ -4,18 +4,38 @@ require 'sinatra/base'
 
 require_relative './lib/link'
 require_relative './lib/tag'
-
+require_relative './lib/user'
 require_relative './lib/helpers/database_helper'
 
 class Bookmark < Sinatra::Base
-  get '/links' do
-    @links = Link.all
-    erb(:home)
+
+  enable :sessions
+
+  get '/' do
+    erb :home
   end
+
+  get '/sign-up' do
+    erb(:'sign-up')
+  end
+
+  post '/sign-up' do
+    User.create(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], password: params[:password])
+    session[:name] = params[:first_name]
+    redirect '/links'
+  end
+
+  get '/links' do
+    @name = session[:name]
+    @links = Link.all
+    erb(:links)
+  end
+
 
   get '/link/add' do
     erb(:add_link)
   end
+
 
   get '/tags/:name' do
     @name = params[:name]
