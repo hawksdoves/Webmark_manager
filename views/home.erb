@@ -8,10 +8,12 @@
   <div class="link-box">
     <ul id="links">
       <% @links.each do |link| %>
-        <li><a href="<%=link.href %>"><%=link.title %></a></li>
+        <li><a href="<%=link.href %>"><%=link.title %></a> </li>
+        <div><%= link.tags[0].name%></div>
       <% end %>
     </ul>
   </div>
+
   <form class="" action='/link/add' method="get">
     <input type="submit" value="Add Link">
   </form>

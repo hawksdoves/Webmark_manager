@@ -10,4 +10,5 @@ gem 'selenium-webdriver'
 group :test do
   gem 'rspec'
   gem 'rake'
+  gem 'pry'
 end
