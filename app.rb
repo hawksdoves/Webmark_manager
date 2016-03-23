@@ -1,22 +1,20 @@
+ENV["RACK_ENV"] ||= "development"
 require 'sinatra/base'
 require_relative './lib/link'
 
-ENV["RACK_ENV"] ||= "development"
-
 class Bookmark < Sinatra::Base
-  get '/' do
+  get '/links' do
     @links = Link.all
     erb(:home)
   end
 
-  get '/add_link' do
-
+  get '/link/add' do
     erb(:add_link)
   end
 
-  post '/new' do
+  post '/link/add' do
     Link.create(title: params[:title], href: params[:href])
-    redirect to('/')
+    redirect to('/links')
   end
 
   # start the server if ruby file executed directly
