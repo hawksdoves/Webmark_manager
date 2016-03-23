@@ -9,6 +9,16 @@
   a {
     background-color:transparent; text-decoration:none
   }
+  .tag {
+    color: black;
+  }
+  a.tag:hover {
+    color: white
+  }
+
+  .tag:visited {
+    color: black;
+  }
   a:link    {color: white;}
   a:visited {color: white;}
   a:hover   {color:#ff0066;}
@@ -51,6 +61,7 @@
     padding-left: 5;
     letter-spacing: 1;
     border: none;
+    cursor:pointer;
   }
 
 input[type="submit" i] {
