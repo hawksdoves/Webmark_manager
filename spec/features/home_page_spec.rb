@@ -28,3 +28,19 @@ feature 'Add one tag to a link' do
   end
 
 end
+
+feature 'Add a second tag to a link' do
+	
+  scenario 'can add tags when saving new links' do
+    Link.create(href: 'http://www.google.com', title: 'Google Search', tags: [Tag.first_or_create(name: 'search')] )    
+    visit '/links'
+
+    	click_link("+")
+
+    fill_in('tag', with: 'God')
+    click_button("Save")   
+   	expect(page).to have_content 'God'
+    end
+
+
+end

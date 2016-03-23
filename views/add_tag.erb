@@ -1,0 +1,19 @@
+<head>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+
+<body>
+  <h1>- Bookmarks -</h1>
+  <h2>Add Tag to <%= @link.title %></h2>
+  <form class="add_form" action="/tag/add/<%=@link.id%>" method="post">
+  
+  <div>
+    <input type="text" name="tag" placeholder="Tag">
+  </div>
+  <div>
+    <input type="submit" value="Save">
+  </div>
+
+  </form>
+</body>

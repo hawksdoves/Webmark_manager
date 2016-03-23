@@ -25,8 +25,23 @@ class Bookmark < Sinatra::Base
     end
     erb(:tag)
   end
+
   post '/link/add' do
     link = Link.create(title: params[:title], href: params[:href])
+    tag = Tag.create(name: params[:tag])
+    LinkTag.create(:link => link, :tag => tag)
+    redirect to('/links')
+  end
+
+  get '/tag/add/:id' do
+    id = params[:id].to_i
+    @link = Link.get(id)
+    erb :add_tag
+  end
+
+  post '/tag/add/:id' do
+    id = params[:id].to_i
+    link = Link.get(id)
     tag = Tag.create(name: params[:tag])
     LinkTag.create(:link => link, :tag => tag)
     redirect to('/links')
