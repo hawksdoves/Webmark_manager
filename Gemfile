@@ -9,6 +9,5 @@ gem 'capybara'
 gem 'selenium-webdriver'
 group :test do
   gem 'rspec'
-  gem 'pry'
   gem 'rake'
 end
