@@ -20,16 +20,14 @@ class Bookmark < Sinatra::Base
 
   get '/tags/:name' do
     @name = params[:name]
-    @links = Link.all.select do |link|
-      link.tags[0].name == @name
-    end
+    @links = Tag.all(:name => @name).links
     erb(:tag)
   end
 
   post '/link/add' do
     link = Link.create(title: params[:title], href: params[:href])
-    tag = Tag.create(name: params[:tag])
-    LinkTag.create(:link => link, :tag => tag)
+    tag = Tag.first_or_create(name: params[:tag])
+    LinkTag.first_or_create(:link => link, :tag => tag)
     redirect to('/links')
   end
 
@@ -42,8 +40,8 @@ class Bookmark < Sinatra::Base
   post '/tag/add/:id' do
     id = params[:id].to_i
     link = Link.get(id)
-    tag = Tag.create(name: params[:tag])
-    LinkTag.create(:link => link, :tag => tag)
+    tag = Tag.first_or_create(name: params[:tag])
+    LinkTag.first_or_create(:link => link, :tag => tag)
     redirect to('/links')
   end
 

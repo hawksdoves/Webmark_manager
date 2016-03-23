@@ -11,7 +11,12 @@
         <div>
           <li>
             <a href="<%=link.href %>"><%=link.title %></a>
-            <div><a href="/tags/<%=link.tags[0].name%>" class="tag"><%=link.tags[0].name%> </a></div>
+            <div>
+              <% link.tags.each do |tag| %>
+                <a href="/tags/<%=tag.name%>" class="tag"><%= tag.name %></a>
+              <% end %>
+                <a class="add" href="/tag/add/<%= link.id %>">+</a>
+            </div>
           </li>
         </div>
       <% end %>

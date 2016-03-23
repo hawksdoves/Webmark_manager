@@ -14,7 +14,7 @@
             <div><% link.tags.each do |tag| %>
               <a href="/tags/<%=tag.name%>" class="tag"><%= tag.name %></a>
             <% end %>
-              <a href="/tag/add/<%= link.id %>">+</a>
+              <a class="add" href="/tag/add/<%= link.id %>">+</a>
             </div>
           </li>
         </div>
