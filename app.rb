@@ -5,7 +5,7 @@ require 'sinatra/base'
 require_relative './lib/link'
 require_relative './lib/tag'
 require_relative './lib/user'
-require_relative './lib/helpers/database_helper'
+require_relative './data_mapper_setup'
 
 class Bookmark < Sinatra::Base
 

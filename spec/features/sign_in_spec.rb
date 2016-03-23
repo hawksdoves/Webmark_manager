@@ -7,9 +7,9 @@ feature 'sign up' do
     fill_in('last_name', with: 'By')
     fill_in('email', with: 'bob.by@gmail.com' )
     fill_in('password', with: 'bobByg' )
-    click_button("Sign up")
+    expect{click_button("Sign up")}.to change{User.count}.by 1
     expect(page).to have_content 'Welcome Bob!'
-    expect(User.count).to change_by 1
+
   end
 
 end
