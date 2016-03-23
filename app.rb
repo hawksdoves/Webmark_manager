@@ -18,6 +18,13 @@ class Bookmark < Sinatra::Base
     erb(:add_link)
   end
 
+  get '/tags/:name' do
+    @name = params[:name]
+    @links = Link.all.select do |link|
+      link.tags[0].name == @name
+    end
+    erb(:tag)
+  end
   post '/link/add' do
     link = Link.create(title: params[:title], href: params[:href])
     tag = Tag.create(name: params[:tag])
