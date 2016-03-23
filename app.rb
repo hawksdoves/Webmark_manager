@@ -2,7 +2,6 @@ ENV["RACK_ENV"] ||= "development"
 
 require 'sinatra/base'
 
-require 'pry'
 require_relative './lib/link'
 require_relative './lib/tag'
 
