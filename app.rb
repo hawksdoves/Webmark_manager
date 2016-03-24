@@ -9,6 +9,7 @@ require_relative './lib/user'
 require_relative './data_mapper_setup'
 
 class Bookmark < Sinatra::Base
+  use Rack::MethodOverride
   enable :sessions
   register Sinatra::Flash
 
@@ -26,11 +27,18 @@ class Bookmark < Sinatra::Base
       flash.now[:error] = ["User does not exist!"]
       erb :"log-in"
     elsif user.authenticate(params[:password])
-      redirect to('/links')  
-    else 
+      redirect to('/links')
+    else
       flash.now[:error] = user.errors.full_messages
       erb(:"log-in")
     end
+  end
+
+  delete '/sessions' do
+    user = User.get(session[:user_id])
+    flash.keep[:notice] = 'Goodbye #{user.first_name}!'
+    session[:user_id] = nil
+    redirect to '/'
   end
 
   get '/sign-up' do
