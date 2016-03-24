@@ -12,4 +12,10 @@ feature 'sign up' do
     expect(page).to have_content("Mismatching passwords, please try again.")
     expect(User.all).to be_empty
   end
+
+  scenario 'should keep names and email saved if mismatching passwords' do
+    fill_in_sign_up
+    click_button "Sign up"
+    expect(page).to have_selector('input[value="bob.by@gmail.com"]')
+  end
 end

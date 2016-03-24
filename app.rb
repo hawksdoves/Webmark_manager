@@ -27,12 +27,18 @@ class Bookmark < Sinatra::Base
   end
 
   post '/sign-up' do
-    flash[:error] = "Mismatching passwords, please try again." unless password_same?
-    redirect '/sign-up' unless password_same?
-    user = User.create(first_name: params[:first_name], last_name: params[:last_name],
-      email: params[:email], password: params[:password])
-    session[:user_id] = user.id
-    redirect '/links'
+    if !password_same?
+      flash[:error] = "Mismatching passwords, please try again."
+      flash[:email] = params[:email]
+      flash[:first_name] = params[:first_name]
+      flash[:last_name] = params[:last_name]
+      redirect '/sign-up'
+    else
+      user = User.create(first_name: params[:first_name], last_name: params[:last_name],
+        email: params[:email], password: params[:password])
+      session[:user_id] = user.id
+      redirect '/links'
+    end
   end
 
   helpers do

@@ -9,13 +9,13 @@
   <h3><% if flash[:error] %><%=flash[:error]%><% end %></h3>
   <form class="add_form" action="/sign-up" method="post">
   <div>
-    <input type="text" name="first_name" placeholder="First Name">
+    <input type="text" name="first_name" placeholder="First Name" value="<%=flash[:first_name]%>" >
   </div>
   <div>
-    <input type="text" name="last_name" placeholder="Last Name">
+    <input type="text" name="last_name" placeholder="Last Name" value="<%=flash[:last_name]%>">
   </div>
   <div>
-    <input type="text" name="email" placeholder="Email">
+    <input id='filler' type="text" name="email" placeholder="Email" value="<%=flash[:email]%>">
   </div>
     <div>
     <input type="password" name="password" placeholder="Password">
