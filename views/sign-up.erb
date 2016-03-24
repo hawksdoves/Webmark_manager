@@ -6,7 +6,7 @@
 <body>
   <h1>- Bookmarks -</h1>
   <h2>Sign up</h2>
-  <h3><% if password_diff %> Mismatching passwords, please try again. <% end %></h3>
+  <h3><% if flash[:error] %><%=flash[:error]%><% end %></h3>
   <form class="add_form" action="/sign-up" method="post">
   <div>
     <input type="text" name="first_name" placeholder="First Name">

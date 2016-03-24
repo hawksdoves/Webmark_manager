@@ -1,6 +1,7 @@
 ENV["RACK_ENV"] ||= "development"
 
 require 'sinatra/base'
+require 'sinatra/flash'
 
 require_relative './lib/link'
 require_relative './lib/tag'
@@ -8,18 +9,14 @@ require_relative './lib/user'
 require_relative './data_mapper_setup'
 
 class Bookmark < Sinatra::Base
-
   enable :sessions
+  register Sinatra::Flash
 
   get '/' do
     erb :home
   end
 
   helpers do
-    def password_diff
-      session[:error]
-    end
-
     def password_same?
       params[:password_check] == params[:password]
     end
@@ -30,7 +27,7 @@ class Bookmark < Sinatra::Base
   end
 
   post '/sign-up' do
-    password_same? ? (session[:error] = false) : (session[:error] = true)
+    flash[:error] = "Mismatching passwords, please try again." unless password_same?
     redirect '/sign-up' unless password_same?
     user = User.create(first_name: params[:first_name], last_name: params[:last_name],
       email: params[:email], password: params[:password])

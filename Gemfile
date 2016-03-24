@@ -8,6 +8,7 @@ gem 'shotgun'
 gem 'capybara'
 gem 'selenium-webdriver'
 gem 'bcrypt'
+gem 'sinatra-flash'
 group :test do
   gem 'rspec'
   gem 'rake'
