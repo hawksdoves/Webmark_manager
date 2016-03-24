@@ -8,7 +8,7 @@ feature 'sign up' do
 
   scenario 'cannot sign up if mismatching passwords' do
     fill_in_sign_up
-    click_button "Sign up"
+    expect{click_button "Sign up"}.to change{User.count}.by 0
     expect(page).to have_content("Mismatching passwords, please try again.")
     expect(User.all).to be_empty
   end
