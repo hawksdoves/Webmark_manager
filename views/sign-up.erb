@@ -15,7 +15,10 @@
     <input type="text" name="last_name" placeholder="Last Name" value="<%=flash[:last_name]%>">
   </div>
   <div>
-    <input id='filler' type="text" name="email" placeholder="Email" value="<%=flash[:email]%>">
+
+    <legend><abbr title="This field is mandatory"></abbr></legend>
+      <input id='filler' type="text"  required name="email" placeholder="Email" value="<%=flash[:email]%>">
+
   </div>
     <div>
     <input type="password" name="password" placeholder="Password">
