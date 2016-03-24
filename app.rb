@@ -16,6 +16,23 @@ class Bookmark < Sinatra::Base
     erb :home
   end
 
+  get '/log-in' do
+    erb :"log-in"
+  end
+
+  post '/log-in' do
+    user = User.first(email: params[:email])
+    if user.nil?
+      flash.now[:error] = ["User does not exist!"]
+      erb :"log-in"
+    elsif user.authenticate(params[:password])
+      redirect to('/links')  
+    else 
+      flash.now[:error] = user.errors.full_messages
+      erb(:"log-in")
+    end
+  end
+
   get '/sign-up' do
     erb(:'sign-up')
   end
