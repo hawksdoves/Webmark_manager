@@ -3,7 +3,7 @@
 </head>
 
 <body>
-<h1> Welcome <%= @name %>!</h1>
+<h1> Welcome <% if current_user %> <%= current_user.first_name %><% end%>!</h1>
   <h1>- Bookmarks -</h1>
   <h2></h2>
   <div class="link-box">

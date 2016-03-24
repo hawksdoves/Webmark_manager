@@ -20,13 +20,19 @@ class Bookmark < Sinatra::Base
   end
 
   post '/sign-up' do
-    User.create(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], password: params[:password])
-    session[:name] = params[:first_name]
+    user = User.create(first_name: params[:first_name], last_name: params[:last_name], 
+      email: params[:email], password: params[:password])
+    session[:user_id] = user.id
     redirect '/links'
   end
 
+  helpers do
+    def current_user
+      @current_user ||= User.get(session[:user_id])
+    end
+  end
+
   get '/links' do
-    @name = session[:name]
     @links = Link.all
     erb(:links)
   end
@@ -63,6 +69,8 @@ class Bookmark < Sinatra::Base
     LinkTag.first_or_create(:link => link, :tag => tag)
     redirect to('/links')
   end
+
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0
