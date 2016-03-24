@@ -27,7 +27,7 @@
   html {
     font-family: 'Futura', sans-serif;
     text-align: center;
-    background-color: #0DFF74
+    background-color: #ffb3ff;
   }
   h1 {
     text-transform: uppercase;
@@ -36,7 +36,7 @@
   div.link-box {
     width: 50%;
     margin: 0 auto;
-    background-color: rgba(255, 0, 0, 0.1);
+    background-color: #990099;
     width: 30%;
     min-width: 310;
   }
