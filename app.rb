@@ -35,8 +35,7 @@ class Bookmark < Sinatra::Base
   end
 
   delete '/sessions' do
-    user = User.get(session[:user_id])
-    flash.keep[:notice] = 'Goodbye #{user.first_name}!'
+    flash.keep[:notice] = "Goodbye!"
     session[:user_id] = nil
     redirect to '/'
   end
