@@ -9,7 +9,7 @@
   a {
     background-color:transparent; text-decoration:none
   }
-  .tag {
+  a.tag:link {
     color: black;
   }
   a.tag:hover {
