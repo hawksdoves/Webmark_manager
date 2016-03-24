@@ -15,12 +15,24 @@ class Bookmark < Sinatra::Base
     erb :home
   end
 
+  helpers do
+    def password_diff
+      session[:error]
+    end
+
+    def password_same?
+      params[:password_check] == params[:password]
+    end
+  end
+
   get '/sign-up' do
     erb(:'sign-up')
   end
 
   post '/sign-up' do
-    user = User.create(first_name: params[:first_name], last_name: params[:last_name], 
+    password_same? ? (session[:error] = false) : (session[:error] = true)
+    redirect '/sign-up' unless password_same?
+    user = User.create(first_name: params[:first_name], last_name: params[:last_name],
       email: params[:email], password: params[:password])
     session[:user_id] = user.id
     redirect '/links'

@@ -6,6 +6,7 @@
 <body>
   <h1>- Bookmarks -</h1>
   <h2>Sign up</h2>
+  <h3><% if password_diff %> Mismatching passwords, please try again. <% end %></h3>
   <form class="add_form" action="/sign-up" method="post">
   <div>
     <input type="text" name="first_name" placeholder="First Name">
@@ -18,6 +19,9 @@
   </div>
     <div>
     <input type="password" name="password" placeholder="Password">
+  </div>
+    <div>
+    <input type="password" name="password_check" placeholder="Write Password Again">
   </div>
 
   <div>
