@@ -18,4 +18,15 @@ feature 'sign up' do
     click_button "Sign up"
     expect(page).to have_selector('input[value="bob.by@gmail.com"]')
   end
+
+  scenario 'should flash error if email field left empty' do
+    visit '/'
+    click_button ("Sign up")
+    fill_in('first_name', with: 'Bob')
+    fill_in('last_name', with: 'By')
+    fill_in('password', with: 'bobByg' )
+    fill_in('password_check', with: 'bobByg' )
+    click_button "Sign up"
+    expect(page).to have_content "Please fill in all fields."
+  end
 end

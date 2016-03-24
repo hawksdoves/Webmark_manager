@@ -20,6 +20,10 @@ class Bookmark < Sinatra::Base
     def password_same?
       params[:password_check] == params[:password]
     end
+
+    def empty_field?
+      params[:email].empty? || (params[:password_check].empty? && params[:password].empty?)
+    end
   end
 
   get '/sign-up' do
@@ -27,8 +31,9 @@ class Bookmark < Sinatra::Base
   end
 
   post '/sign-up' do
-    if !password_same?
-      flash[:error] = "Mismatching passwords, please try again."
+    if empty_field? || !password_same?
+      flash[:error] = "Please fill in all fields." if empty_field?
+      flash[:error] = "Mismatching passwords, please try again." if !password_same?
       flash[:email] = params[:email]
       flash[:first_name] = params[:first_name]
       flash[:last_name] = params[:last_name]
