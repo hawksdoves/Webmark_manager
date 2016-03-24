@@ -22,11 +22,16 @@ feature 'sign up' do
   scenario 'should stay on sign in page, if email left empty' do
     visit '/'
     click_button ("Sign up")
+    expect(page).to have_xpath("//input[@required='required']")
+  end
+
+  scenario 'will not accept invalid email' do
+    visit '/sign-up'
     fill_in('first_name', with: 'Bob')
     fill_in('last_name', with: 'By')
+    fill_in('email', with: 'bob.by@gmail' )
     fill_in('password', with: 'bobByg' )
     fill_in('password_check', with: 'bobByg' )
-    click_button "Sign up"
-    expect(page).not_to have_xpath("//input[@required='required']")
-  end
+    expect{click_button "Sign up"}.to change{User.count}.by 0
+  end 
 end
