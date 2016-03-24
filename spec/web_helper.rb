@@ -6,3 +6,12 @@ def fill_in_sign_up
   fill_in('email', with: 'bob.by@gmail.com' )
   fill_in('password', with: 'bobByg' )
 end
+
+def sign_up_same_details
+  fill_in_sign_up
+  fill_in('password_check', with: 'bobByg' )
+  click_button "Sign up"
+  fill_in_sign_up
+  fill_in('password_check', with: 'bobByg' )
+  click_button "Sign up"
+end

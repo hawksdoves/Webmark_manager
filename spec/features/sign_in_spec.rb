@@ -33,5 +33,9 @@ feature 'sign up' do
     fill_in('password', with: 'bobByg' )
     fill_in('password_check', with: 'bobByg' )
     expect{click_button "Sign up"}.to change{User.count}.by 0
-  end 
+  end
+
+  scenario 'user cannot sign up twice with the same email' do
+    expect{sign_up_same_details}.to change{User.count}.by 1
+  end
 end
