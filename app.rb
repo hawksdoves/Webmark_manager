@@ -16,28 +16,19 @@ class Bookmark < Sinatra::Base
     erb :home
   end
 
-  helpers do
-    def password_same?
-      params[:password_check] == params[:password]
-    end
-  end
-
   get '/sign-up' do
     erb(:'sign-up')
   end
 
   post '/sign-up' do
-    if !password_same?
-      flash[:error] = "Mismatching passwords, please try again." if !password_same?
-      flash[:email] = params[:email]
-      flash[:first_name] = params[:first_name]
-      flash[:last_name] = params[:last_name]
-      redirect '/sign-up'
+    @user = User.new(first_name: params[:first_name], last_name: params[:last_name],
+      email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+    if @user.save
+      session[:user_id] = @user.id
+      redirect to('/links')
     else
-      user = User.create(first_name: params[:first_name], last_name: params[:last_name],
-        email: params[:email], password: params[:password])
-      session[:user_id] = user.id
-      redirect '/links'
+      flash.now[:error] = @user.errors.full_messages
+      erb(:'sign-up')
     end
   end
 

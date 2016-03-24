@@ -9,9 +9,9 @@ end
 
 def sign_up_same_details
   fill_in_sign_up
-  fill_in('password_check', with: 'bobByg' )
+  fill_in('password_confirmation', with: 'bobByg' )
   click_button "Sign up"
   fill_in_sign_up
-  fill_in('password_check', with: 'bobByg' )
+  fill_in('password_confirmation', with: 'bobByg' )
   click_button "Sign up"
 end

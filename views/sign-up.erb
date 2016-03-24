@@ -6,25 +6,24 @@
 <body>
   <h1>- Bookmarks -</h1>
   <h2>Sign up</h2>
-  <h3><% if flash[:error] %><%=flash[:error]%><% end %></h3>
+  <h3><%if flash[:error]%><%= flash[:error][0]%><%end%></h3>
   <form class="add_form" action="/sign-up" method="post">
   <div>
-    <input type="text" name="first_name" placeholder="First Name" value="<%=flash[:first_name]%>" >
+    <input type="text" name="first_name" placeholder="First Name" value="<%if @user%><%=@user.first_name%><%end%>" >
   </div>
   <div>
-    <input type="text" name="last_name" placeholder="Last Name" value="<%=flash[:last_name]%>">
+    <input type="text" name="last_name" placeholder="Last Name" value="<%if @user%><%=@user.last_name%><%end%>">
   </div>
   <div>
 
-    <legend><abbr title="This field is mandatory"></abbr></legend>
-      <input id='filler' type="email" required="required" name="email" placeholder="Email" value="<%=flash[:email]%>">
+      <input id='filler' type="email" name="email" placeholder="Email" value="<%if @user%><%=@user.email%><%end%>">
 
   </div>
     <div>
     <input type="password" name="password" placeholder="Password">
   </div>
     <div>
-    <input type="password" name="password_check" placeholder="Write Password Again">
+    <input type="password" name="password_confirmation" placeholder="Write Password Again">
   </div>
 
   <div>
